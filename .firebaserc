@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "reelevamientovisual2023"
+  },
+  "targets": {
+    "reelevamientovisual2023": {
+      "hosting": {
+        "app": [
+          "reelevamientovisual2023"
+        ]
+      }
+    }
+  }
+}
