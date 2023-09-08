@@ -24,10 +24,10 @@ export class LoginPage {
   onLogin(form: NgForm) {
      this.submitted = true;
      if (form.valid) {
-       this.spinner = true;
+      //  this.spinner = true;//
        this.auth.signIn(form.form.value.email, form.form.value.password)
          .then(() => {
-              this.router.navigateByUrl('/home');
+              this.router.navigateByUrl('/tabs');
          })
          .catch((error) => (this.error = error))
          .finally(() => {

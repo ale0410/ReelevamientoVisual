@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LindasPageRoutingModule } from './lindas-routing.module';
 
 import { LindasPage } from './lindas.page';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LindasPage } from './lindas.page';
     IonicModule,
     LindasPageRoutingModule
   ],
-  declarations: [LindasPage]
+  declarations: [LindasPage],
+  //providers: [Camera]
 })
 export class LindasPageModule {}

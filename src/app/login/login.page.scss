@@ -2,20 +2,6 @@
   color : red;
 }
 
-#idForm{
-  background-color: #083c5d;
-  padding: 118px 40px;
-}
-
-#idFound{
-  background-color: #548bae;
-  padding: 240px 40px;
-}
-
-#idColRow{
-  background-color: rgb(237, 237, 110);
-}
-
 .list {
   margin-bottom: 0;
 }
@@ -23,4 +9,53 @@
 ion-icon{
   background-color: rgb(4, 147, 133);
 }
+
+ion-list{
+  background-color: magenta;
+
+  .ion-item{
+    background-color: rgb(108, 106, 106);
+  }
+}
+
+ion-input{
+  background-color: rgb(255, 255, 49);
+}
+
+#header{
+  height: 33%;
+  background: rgb(183, 183, 4);
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  padding: 40px 20px;
+
+  #app-bar{
+    height: 60px;
+    align-items: center;
+
+    #logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img{
+      border-radius: 50%;
+      width: 90px; 
+      height: 90px;
+      align-items: center; 
+      }
+    }
+  }
+
+  ion-content{
+    background-image: url(../../assets/images/fondo.jpg) !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+}
+
+
 

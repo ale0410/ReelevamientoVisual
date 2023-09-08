@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -27,6 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { FeasPage } from './pages/feas/feas.page';
 import { LindasPage } from './pages/lindas/lindas.page';
+import { Camera } from '@ionic-native/camera';
+import { HttpClient } from '@angular/common/http';
+import { CamaraProvider } from 'src/providers/camara/camara';
 
 
 
@@ -51,12 +54,12 @@ import { LindasPage } from './pages/lindas/lindas.page';
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore())],
   providers: [StatusBar, 
-    SplashScreen, 
-    NavParams, 
+    SplashScreen,
+    CamaraProvider,
+    ImagenesProvider,
+    UsuariosProvider, 
     AuthService, 
     AngularFirestoreModule, 
-    UsuariosProvider, 
-    ImagenesProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, 
   ],
   bootstrap: [AppComponent],

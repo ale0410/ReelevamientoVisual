@@ -50,7 +50,15 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./pages/splash/splash.module').then( m => m.SplashPageModule)
-  }
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'camara/:type',
+    loadChildren: () => import('./camara/camara.module').then( m => m.CamaraPageModule)
+  },
 ];
 
 @NgModule({

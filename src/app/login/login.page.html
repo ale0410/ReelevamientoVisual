@@ -4,34 +4,43 @@
 <ion-content>
 
   <div id="idFound">
-    <div *ngIf="spinner">
+    <!-- <div *ngIf="spinner">
       spinnerr
-    </div>
+    </div> -->
     <div *ngIf="error">
       {{error}}
+    </div>
+
+    <div id="header">
+      <div id="app-bar">
+        <div id="logo">
+          <img alt="icono" src="../../assets/icon/img-camara-IP-exterior.png"/>
+        </div>
+        <div></div>
+      </div>
     </div>
   
     <form *ngIf="!spinner" #loginForm="ngForm" novalidate>
       <div id="idForm">
         <ion-list>
   
-          <ion-item>
-            <ion-label position="stacked" color="primary">Mail</ion-label>
+          <div class=ion-item>
+            <ion-label position="stacked" color="black">Mail</ion-label>
             <ion-input [(ngModel)]="login.email" name="email" type="text" #mail="ngModel" spellcheck="false"
               autocapitalize="off" required>
             </ion-input> 
-          </ion-item>
+          </div>
           <ion-text color="danger">
             <p [hidden]="mail.valid || submitted === false" class="ion-padding-start">
               Por favor, ingrese su Correo Electrónico.
             </p>
           </ion-text>
     
-          <ion-item>
-            <ion-label position="stacked" color="primary">Contraseña</ion-label>
+          <div class=ion-item>
+            <ion-label position="stacked" color="black">Contraseña</ion-label>
             <ion-input [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required>
             </ion-input>
-          </ion-item>
+          </div>
           <ion-text color="danger">
             <p [hidden]="!password.errors || submitted === false" class="ion-padding-start">
               La contraseña ingresada es muy corta.
@@ -51,9 +60,9 @@
           </ion-col>
         </ion-row>
 
-        <ion-fab vertical="center" horizontal="end" slot="fixed">
+        <ion-fab vertical="top" horizontal="end" slot="fixed">
           <ion-fab-button>
-            <ion-icon name="chevron-forward"></ion-icon>
+            <ion-icon name="share"></ion-icon>
           </ion-fab-button>
           <ion-fab-list side="bottom">
             Admin

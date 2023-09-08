@@ -9,9 +9,9 @@ import firebase from 'firebase/compat/app';
 import { Imagen } from 'src/app/clases/Imagen';
 import { ImagenesProvider } from 'src/providers/imagenes/imagenes';
 import { Usuario } from 'src/app/clases/Usuario';
-//import { ListaLindasPage } from '../lista-lindas/lista-lindas.page';
+import { ListaLindasPage } from '../lista-lindas/lista-lindas.page';
 import { Voto } from 'src/app/clases/Voto';
-//import { MisFotosPage } from '../mis-fotos/mis-fotos.page';
+import { MisFotosPage } from '../mis-fotos/mis-fotos.page';
 
 @Component({
   selector: 'app-lindas',
@@ -63,13 +63,15 @@ export class LindasPage {
       await this.camera.getPicture(options).then((imageData:any)=>{
       this.captureDataUrl.push('data:image/jpeg;base64,'+ imageData);
       this.hayFotos=true;
-      }, (error:any)=>{
+      }, async (error:any)=>{
         
-        this.alertCtrl.create({
-          //title: 'Error!',
+        return (await this.alertCtrl.create({
+          //title: 'Error!', 
           //subTitle: error,
+          message: 'Error!',
+          subHeader: 'error',
           buttons: ['Ok']
-        });//.present();
+        })).present();
 
       });
     }

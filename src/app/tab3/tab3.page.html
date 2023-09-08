@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Gráficos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header *ngIf="!uploading">
+      <ion-card-title>Cosas Feas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header *ngIf="!uploading">
+      <ion-card-title>Cosas Lindas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas id="pieChart" width="400" height="400"></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

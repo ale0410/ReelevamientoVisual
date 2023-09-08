@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FeasPageRoutingModule } from './feas-routing.module';
 
 import { FeasPage } from './feas.page';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FeasPage } from './feas.page';
     IonicModule,
     FeasPageRoutingModule
   ],
-  declarations: [FeasPage]
+  declarations: [FeasPage],
+  providers: [Camera]
 })
 export class FeasPageModule {}

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SplashPageRoutingModule } from './splash-routing.module';
 
 import { SplashPage } from './splash.page';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { SplashPage } from './splash.page';
     IonicModule,
     SplashPageRoutingModule
   ],
-  declarations: [SplashPage]
+  declarations: [SplashPage],
+  providers: [SplashScreen]
 })
 export class SplashPageModule {}

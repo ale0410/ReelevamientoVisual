@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from '@ionic/angular';
 
 import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
@@ -10,8 +10,8 @@ import firebase from 'firebase/compat/app';
 import { ImagenesProvider } from 'src/providers/imagenes/imagenes';
 import { Imagen } from 'src/app/clases/Imagen';
 import { Usuario } from 'src/app/clases/Usuario';
-import { ListaFeasPage } from '../lista-feas/lista-feas.page';
-import { MisFotosPage } from '../mis-fotos/mis-fotos.page';
+//import { ListaFeasPage } from '../lista-feas/lista-feas.page';
+//import { MisFotosPage } from '../mis-fotos/mis-fotos.page';
 
 
 @Component({

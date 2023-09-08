@@ -10,8 +10,24 @@ import { Validator } from '../clases/Validators';
 export class AuthService {
 
   userData!: Observable<firebase.User | null>;
+  public myUsuario: string = "valor inicial";
   constructor(private angularFireAuth: AngularFireAuth) {
      this.userData = angularFireAuth.authState;   
+  }
+
+  login(mail: string, password: string) {
+    this.myUsuario = this.formatNombre(mail);
+    return this.angularFireAuth.signInWithEmailAndPassword(mail, password);
+  }
+
+  formatNombre(email: string){
+
+    if(email != "" && email != null){
+      const name: string = email.substring(0, email.indexOf("@"));
+      const capitalized: string = name.charAt(0).toUpperCase() + name.slice(1);
+      return capitalized;
+    }
+    return "";
   }
 
   /*

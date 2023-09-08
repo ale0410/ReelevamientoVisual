@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Entrada al edificio {{myUsser}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-row>
+      <ion-col style="background-color: #548bae;">
+        <ion-button
+          color="none" 
+          expand="block"
+          class="ion-button"
+          style="background-image:url('../../assets/images/cosaslindas.jpg'); background-size:cover; padding: 10px; height: 380px" 
+          (click)="navegarCamara('Cosas Lindas')"
+        >
+          <div style="background-color: rgba(0,0,0,0.5); color: white; padding: 20px; width: 100%;">
+            Cosas Lindas 
+          </div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col style="background-color: #548bae;">
+        <ion-button 
+          color="none" 
+          expand="block"
+          class="ion-button"
+          style="background-image:url('../../assets/images/cosasfeas.jpg'); background-size:cover; padding: 10px; height: 380px"
+          (click)="navegarCamara('Cosas Feas')"
+        >
+          <div style="background-color: rgba(0,0,0,0.5); color: white; padding: 20px; width: 100%;">
+            Cosas Feas 
+          </div>
+      </ion-button>
+      </ion-col>
+    </ion-row>
+</ion-content>
