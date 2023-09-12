@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngIf="!uploading" style="background-color: #022c45;">
+  <ion-list *ngIf="!uploading" style="background-image: url('../../assets/images/floor.jpg');">
     <ion-card *ngFor="let item of items"  class="custom-card">
       <img alt="Silhouette of mountains" src="{{item.image}}" />
       <ion-card-header>

@@ -14,7 +14,7 @@ ion-header{
 }
 
 ion-content{
-    background-color: #548bae;
+    --background: url('../../assets/images/floor.jpg');
 }
 
 ion-card{
@@ -26,5 +26,5 @@ ion-card-header{
 }
 
 ion-card-content{
-    background-color: #78c4f4;
+    background-image: url('../../assets/images/floor.jpg');
 }

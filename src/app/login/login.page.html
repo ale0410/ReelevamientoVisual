@@ -19,11 +19,11 @@
         <div></div>
       </div>
     </div>
-  
+    <br>
     <form *ngIf="!spinner" #loginForm="ngForm" novalidate>
       <div id="idForm">
         <ion-list>
-  
+          <br><br><br>
           <div class=ion-item>
             <ion-label position="stacked" color="black">Mail</ion-label>
             <ion-input [(ngModel)]="login.email" name="email" type="text" #mail="ngModel" spellcheck="false"
@@ -35,7 +35,7 @@
               Por favor, ingrese su Correo Electrónico.
             </p>
           </ion-text>
-    
+          <br><br><br>
           <div class=ion-item>
             <ion-label position="stacked" color="black">Contraseña</ion-label>
             <ion-input [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required>
@@ -54,11 +54,10 @@
     
         </ion-list>
     
-        <ion-row>
-          <ion-col>
-            <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Ingresar</ion-button>
-          </ion-col>
-        </ion-row>
+        <br>
+        
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Ingresar</ion-button>
+          
 
         <ion-fab vertical="top" horizontal="end" slot="fixed">
           <ion-fab-button>
