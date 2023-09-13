@@ -1,9 +1,9 @@
 
 <!--Aplicarles estilos a todos los inputs, botones de acceso rapido que no sean textos sino botones -->
 
-<ion-content>
+<ion-content [fullscreen]= "true" class="ion-padding">
 
-  <div id="idFound">
+  
     <!-- <div *ngIf="spinner">
       spinnerr
     </div> -->
@@ -21,26 +21,24 @@
     </div>
     <br>
     <form *ngIf="!spinner" #loginForm="ngForm" novalidate>
-      <div id="idForm">
+      <div class="">
+
+      </div>
         <ion-list>
-          <br><br><br>
-          <div class=ion-item>
-            <ion-label position="stacked" color="black">Mail</ion-label>
-            <ion-input [(ngModel)]="login.email" name="email" type="text" #mail="ngModel" spellcheck="false"
-              autocapitalize="off" required>
+          <ion-item>
+            <ion-input shape="round" [(ngModel)]="login.email" name="email" type="email" #mail="ngModel" spellcheck="false"
+              autocapitalize="off" required fill="outline" label="Mail" label-placement="floating">
             </ion-input> 
-          </div>
+          </ion-item>
           <ion-text color="danger">
             <p [hidden]="mail.valid || submitted === false" class="ion-padding-start">
               Por favor, ingrese su Correo Electrónico.
             </p>
           </ion-text>
-          <br><br><br>
-          <div class=ion-item>
-            <ion-label position="stacked" color="black">Contraseña</ion-label>
-            <ion-input [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required>
+          <ion-item>
+            <ion-input shape="round" [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required fill="outline" label="Contraseña" label-placement="floating">
             </ion-input>
-          </div>
+          </ion-item>
           <ion-text color="danger">
             <p [hidden]="!password.errors || submitted === false" class="ion-padding-start">
               La contraseña ingresada es muy corta.
@@ -56,40 +54,39 @@
     
         <br>
         
-        <button (click)="onLogin(loginForm)" type="submit" expand="block">Ingresar</button>
+        <ion-button (click)="onLogin(loginForm)" color="primary" type="submit" expand="block" size="large">Ingresar</ion-button>
           
 
         <ion-fab vertical="top" horizontal="end" slot="fixed">
-          <ion-fab-button>
+          <ion-fab-button size="large">
             <ion-icon name="share"></ion-icon>
           </ion-fab-button>
           <ion-fab-list side="bottom">
             Admin
-            <ion-fab-button>
+            <ion-fab-button color="primary">
               <ion-icon name="person" (click)="admin()"></ion-icon>
             </ion-fab-button>
             Invitado
-            <ion-fab-button>
+            <ion-fab-button color="primary">
               <ion-icon name="person" (click)="invitado()"></ion-icon>
             </ion-fab-button>
             Usuario
-            <ion-fab-button>
+            <ion-fab-button color="primary">
               <ion-icon name="person" (click)="usuario()"></ion-icon>
             </ion-fab-button>
             Anonimo
-            <ion-fab-button>
+            <ion-fab-button color="primary">
               <ion-icon name="person" (click)="anonimo()"></ion-icon>
             </ion-fab-button>
             Tester
-            <ion-fab-button>
+            <ion-fab-button color="primary">
               <ion-icon name="person" (click)="tester()"></ion-icon>
             </ion-fab-button>
           </ion-fab-list>
         </ion-fab>
 
-      </div> 
+
     </form>
-  </div>
 
   
 </ion-content>

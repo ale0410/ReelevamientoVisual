@@ -4,12 +4,12 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: rgb(110, 243, 230);
+  --ion-color-primary: rgba(0,0,0,0.5);
   --ion-color-primary-rgb: 18, 180, 18;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: rgb(119, 220, 210);
-  --ion-color-primary-tint: rgb(75, 210, 197);
+  --ion-color-primary-shade: rgba(0,0,0,0.5);
+  --ion-color-primary-tint: rgba(0,0,0,0.5);
 
   /** secondary **/
   --ion-color-secondary: #3dc2ff;
@@ -76,8 +76,8 @@
   --ion-color-light-tint: #f5f6f9;
 
   --ion-background-color: #cfffb3;
-  --ion-item-background: #fcec52;
-  --ion-card-background: #fcec52;
+  --ion-item-background: transparent;
+  --ion-card-background: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
