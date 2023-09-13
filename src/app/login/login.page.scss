@@ -11,7 +11,14 @@
 }
 
 ion-icon{
-  background-color: rgb(4, 147, 133);
+  background-color: rgb(110, 243, 230);
+  color: black;
+  border-radius: 50%;
+  padding: 11px;
+}
+
+ion-label{
+  font-size:large;
 }
 
 ion-list{
@@ -41,13 +48,18 @@ ion-input{
   
 }
 
-ion-button{
+
+button{
   border-radius: 50%;
-  height: 270px;
+  width: 410px;
+  height: 278px;
   color: black;
   font-style: inherit;
   font-size: xx-large;
+  border-radius: 50%;
+  background-color: rgb(110, 243, 230);
 }
+
 
 #header{
   height: 33%;
