@@ -1,7 +1,7 @@
 /**
  * formato de usuario para guardar en base de datos
  */
-interface User {
+export interface User {
     email: string;
     username: string;
     createdAt: string;

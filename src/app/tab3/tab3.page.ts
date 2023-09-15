@@ -3,8 +3,10 @@ import { AuthService} from '../services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FirestoresService } from '../services/firestores.service';
+import { NgChartsModule } from 'ng2-charts';
+import { NgChartsConfiguration } from 'ng2-charts';
+import { Chart } from 'chart.js';
 //import * as Chart from 'chart.js';
-import { Chart } from 'chart.js/auto';
 import Item from '../interface/Item.interface';
 
 @Component({
@@ -15,7 +17,7 @@ import Item from '../interface/Item.interface';
 export class Tab3Page {
 
   chartType: string = 'bar';
-  torta!: Chart;
+  torta!: NgChartsModule;
   chart!: Chart;
   cosasLindas: Item[] = [];
   cosasFeas: Item[] = [];
@@ -62,9 +64,8 @@ export class Tab3Page {
     const cantidadesVotos = this.cosasFeas.map(item => item.votos);
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);
-    
     this.chart = new Chart(ctx, {
-      type: 'radar',
+      type: 'bar',
       data: {
         labels: nombres,
         datasets: [{
@@ -76,22 +77,18 @@ export class Tab3Page {
       options: {
         responsive: true,
         scales: {
-          ticks: {
-            beginAtZero: true
+          xAxes: {
+            ticks: {
+              backdropColor: 'red',
+              backdropPadding: 100,
+              z: 0
+            }
           },
-          gridLines: {
-            display: false
+          yAxes: {
+            grid: {
+              display: false
+            }
           }
-          // xAxes: [{
-          //   ticks: {
-          //     beginAtZero: true
-          //   }
-          // }],
-          // yAxes: [{
-          //   gridLines: {
-          //     display: false
-          //   }
-          // }]
         },
         plugins: {
           legend: {
