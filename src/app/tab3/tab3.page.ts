@@ -3,8 +3,6 @@ import { AuthService} from '../services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FirestoresService } from '../services/firestores.service';
-import { NgChartsModule } from 'ng2-charts';
-import { NgChartsConfiguration } from 'ng2-charts';
 import { Chart } from 'chart.js';
 //import * as Chart from 'chart.js';
 import Item from '../interface/Item.interface';
@@ -17,11 +15,27 @@ import Item from '../interface/Item.interface';
 export class Tab3Page {
 
   chartType: string = 'bar';
-  torta!: NgChartsModule;
+  torta!: Chart;
   chart!: Chart;
   cosasLindas: Item[] = [];
   cosasFeas: Item[] = [];
   uploading = false;
+  // public pieChartLabels: string[] = ['Etiqueta 1', 'Etiqueta 2', 'Etiqueta 3'];
+  // public pieChartData: number[] = [300, 500, 200];
+  // public pieChartType: string = 'pie';
+  // public barChartOptions: any = {
+  //   scaleShowVerticalLines: false,
+  //   responsive: true
+  // };
+
+  // public barChartLabels: string[] = ['Etiqueta 1', 'Etiqueta 2', 'Etiqueta 3'];
+  // public barChartType: string = 'bar';
+  // public barChartLegend: boolean = true;
+
+  // public barChartData: any[] = [
+  //   { data: [65, 59, 80], label: 'Serie A' },
+  //   { data: [28, 48, 40], label: 'Serie B' }
+  // ];
 
   constructor(
     private router: Router, 
