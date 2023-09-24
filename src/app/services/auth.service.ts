@@ -11,8 +11,10 @@ export class AuthService {
 
   userData!: Observable<firebase.User | null>;
   public myUsuario: string = "valor inicial";
+
   constructor(private angularFireAuth: AngularFireAuth) {
-     this.userData = angularFireAuth.authState;   
+     this.userData = angularFireAuth.authState;
+     //this.myUsuario = this.formatNombre("");   
   }
 
   login(mail: string, password: string) {

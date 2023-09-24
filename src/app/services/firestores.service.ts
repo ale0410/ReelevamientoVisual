@@ -1,16 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, getDocs, doc, setDoc, query, orderBy, where } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import * as database from '@angular/fire/database';
+import { Firestore, collection, collectionData, addDoc, getDocs, doc, setDoc, query, orderBy, where } from '@angular/fire/firestore';
 import Item from '../interface/Item.interface';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoresService {
 
-  constructor(private firestore: Firestore) {
+  items$: Observable<any[]>;
+
+  constructor(private firestore: Firestore, private authService: AuthService, private db: AngularFireDatabase) {
+    const ItemRef = collection(this.firestore, 'relevamiento');
+    this.items$ = collectionData(ItemRef);
   }
-  addItem(item: Item){
-    const ItemRef = collection(this.firestore, 'relevamiento')
+
+  async getUsers() {
+    return this.db.list('users').valueChanges();
+  }
+
+  async addItem(item: Item){
+    const ItemRef = collection(this.firestore, 'relevamiento');
+
     return addDoc(ItemRef, item);
   }
 
@@ -38,5 +52,27 @@ export class FirestoresService {
   async updateItem(item: Item): Promise<void> {
     const itemRef = doc(this.firestore, 'relevamiento', item.id);
     await setDoc(itemRef, item, { merge: true });
+  }
+
+  // async votePhoto(photoId: string, currentVotes: number, hasVoted: boolean) {
+  //   const photoRef = collection(this.firestore, 'relevamiento').id;
+
+  //   // Comprobar si el usuario ya ha votado esta foto
+  //   if (hasVoted) {
+  //     // Si ya votó la foto, quita el voto
+  //     // photoRef.update({ votos: currentVotes - 1 });
+  //     photoRef.replace;
+  //   } else {
+  //     // Si no ha votado la foto, vota por ella
+  //     photoRef.replace;
+  //   }
+  // }
+
+  async voteForPhoto(photoId: string) {
+    // Obtener el ID del usuario actual
+    const userId = this.authService.formatNombre;
+
+    // Verificar si el usuario ya ha votado por esta foto
+    this.firestore.toJSON.call('relevamiento');
   }
 }
