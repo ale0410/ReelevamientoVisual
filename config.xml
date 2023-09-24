@@ -1,0 +1,4 @@
+<platform name="android">
+      <splash src="src/assets/videocamara.gif" />
+      <preference name="SplashScreenDelay" value="6000" />
+</platform>
