@@ -273,7 +273,7 @@ export class Tab3Page {
   createBarra(): void{
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
     const nombres = this.cosasFeas.map(item => item.name);
-    const cantidadesVotos = this.cosasFeas.map(item => item.votos);
+    const cantidadesVotos = this.cosasFeas.map(item => item.votos?.length);
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);
     this.chart = new Chart(ctx, {
@@ -315,7 +315,7 @@ export class Tab3Page {
   createPieChart(): void {
     const ctx = document.getElementById('pieChart') as HTMLCanvasElement;
     const nombres = this.cosasLindas.map(item => item.name);
-    const cantidadesVotos = this.cosasLindas.map(item => item.votos);
+    const cantidadesVotos = this.cosasLindas.map(item => item.votos?.length);
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);
     const data = {

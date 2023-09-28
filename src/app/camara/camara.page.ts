@@ -47,8 +47,8 @@ export class CamaraPage implements OnInit {
 
   ngOnInit() {
     
-    
-    }
+  
+  }
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }

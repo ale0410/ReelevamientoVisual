@@ -3,6 +3,6 @@ export default interface Item {
     name: string;
     image: string;
     tipo: string | null;
-    votos: number;
+    votos: string[];
     fecha: string; 
   };

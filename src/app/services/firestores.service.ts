@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import * as database from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore, collection, collectionData, addDoc, getDocs, doc, setDoc, query, orderBy, where } from '@angular/fire/firestore';
 import Item from '../interface/Item.interface';
 import { Observable } from 'rxjs';
@@ -13,9 +13,24 @@ export class FirestoresService {
 
   items$: Observable<any[]>;
 
-  constructor(private firestore: Firestore, private authService: AuthService, private db: AngularFireDatabase) {
+  constructor(private firestore:Firestore, private authService: AuthService, private db: AngularFireDatabase, private angFirestore: AngularFirestore) {
     const ItemRef = collection(this.firestore, 'relevamiento');
     this.items$ = collectionData(ItemRef);
+  }
+
+  savePhoto(photoId: string, imageUrl: string) {
+    const photoRef = this.angFirestore.collection('fotos').doc(photoId);
+
+    // Verifica si la foto ya existe en la base de datos
+    photoRef.get().subscribe((doc) => {
+      if (doc.exists) {
+        console.log('La foto ya existe en la base de datos');
+      } else {
+        // Si la foto no existe, guárdala con votos = 0
+        photoRef.set({ url: imageUrl, votos: 0 });
+        console.log('La foto se ha guardado en la base de datos');
+      }
+    });
   }
 
   async getUsers() {
@@ -23,9 +38,12 @@ export class FirestoresService {
   }
 
   async addItem(item: Item){
-    const ItemRef = collection(this.firestore, 'relevamiento');
+    const id = this.angFirestore.createId();
+    item.id = id;
+    return this.angFirestore.collection('relevamiento').doc(item.id).set(item);
+    // const ItemRef = collection(this.firestore, 'relevamiento');
 
-    return addDoc(ItemRef, item);
+    // return addDoc(ItemRef, item);
   }
 
   async getAllItems(): Promise<Item[]>{
@@ -51,7 +69,7 @@ export class FirestoresService {
   }
   async updateItem(item: Item): Promise<void> {
     const itemRef = doc(this.firestore, 'relevamiento', item.id);
-    await setDoc(itemRef, item, { merge: true });
+    await setDoc(itemRef, item);
   }
 
   // async votePhoto(photoId: string, currentVotes: number, hasVoted: boolean) {

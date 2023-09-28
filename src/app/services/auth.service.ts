@@ -91,6 +91,10 @@ export class AuthService {
         throw new Error('Mal formato de datos.');
       });
 
+  obtenerUsuario(){
+    return this.angularFireAuth.currentUser;
+  }
+
   /**
    * Termina la sesion del usuario activo
    * actualiza userData(Observable) = null
