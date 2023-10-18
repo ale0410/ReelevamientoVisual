@@ -36,4 +36,12 @@ ion-content{
 ion-toolbar{
     --background: rgba(88, 84, 84, 0.663);
     color: aliceblue;
-}  
+}
+
+ion-header{
+    background-color: gray;
+}
+
+ion-select{
+    background-color: rgba(103, 248, 248, 0.847);
+}

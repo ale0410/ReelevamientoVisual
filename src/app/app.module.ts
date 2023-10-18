@@ -31,6 +31,7 @@ import { LindasPage } from './pages/lindas/lindas.page';
 import { Camera } from '@ionic-native/camera';
 import { HttpClient } from '@angular/common/http';
 import { CamaraProvider } from 'src/providers/camara/camara';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 
 
@@ -38,7 +39,7 @@ import { CamaraProvider } from 'src/providers/camara/camara';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SplashScreenComponent],
   imports: [BrowserModule,
     NgChartsModule, 
     IonicModule.forRoot(), 

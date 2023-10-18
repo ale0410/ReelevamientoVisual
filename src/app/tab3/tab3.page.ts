@@ -27,6 +27,7 @@ export class Tab3Page {
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
+    
     plugins: {
       legend: {
         display: true,
@@ -45,6 +46,7 @@ export class Tab3Page {
     labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
     datasets: [
       {
+        
         data: [300, 500, 100],
       },
     ],
@@ -272,7 +274,7 @@ export class Tab3Page {
 
   createBarra(): void{
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
-    const nombres = this.cosasFeas.map(item => item.name);
+    const nombres = this.cosasFeas.map(item => item.id);
     const cantidadesVotos = this.cosasFeas.map(item => item.votos?.length);
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);
@@ -314,7 +316,7 @@ export class Tab3Page {
 
   createPieChart(): void {
     const ctx = document.getElementById('pieChart') as HTMLCanvasElement;
-    const nombres = this.cosasLindas.map(item => item.name);
+    const nombres = this.cosasLindas.map(item => item.id);
     const cantidadesVotos = this.cosasLindas.map(item => item.votos?.length);
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);

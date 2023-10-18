@@ -32,10 +32,12 @@ export class CamaraPage implements OnInit {
       handler: () => this.cancelar(),
     },
   ];
+  user: string | null | undefined;
   constructor(
     private route: ActivatedRoute,
     public photoService: PhotoService,
     public firestores: FirestoresService,
+    public loginService: AuthService,
     public auth: AuthService,
     private router: Router,
     private loadingCtrl: LoadingController,
@@ -46,7 +48,10 @@ export class CamaraPage implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.loginService.obtenerUsuario().then(userData => {
+      this.user = userData?.email;
+      console.log(this.user);
+ });
   
   }
   addPhotoToGallery() {
@@ -62,7 +67,7 @@ export class CamaraPage implements OnInit {
     await loading.present();
     try {
       const path = 'Galeria';
-      this.newItem.name = this.auth.myUsuario;
+      this.newItem.name = this.user!;
       for (const photo of this.photoService.photos) {
         if (photo.webviewPath) {
           const file = await this.readAsBlob(photo.webviewPath);
@@ -70,7 +75,7 @@ export class CamaraPage implements OnInit {
           const res = await this.photoService.uploadImage(file, path, name);
           this.newItem.id = this.generateUniqueId();
           this.newItem.image = res;
-          this.newItem.fecha = new Date().toLocaleDateString('es-ES');
+          this.newItem.fecha = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
           const response = await this.firestores.addItem(this.newItem);
           console.log(response);
         }

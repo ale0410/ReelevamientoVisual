@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService} from '../services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 import { FirestoresService } from '../services/firestores.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import Item from '../interface/Item.interface';
 import { ToastServiceService } from '../services/toast-service.service';
 
@@ -17,12 +17,15 @@ export class Tab2Page implements OnInit {
   items: Item[] = [];
   uploading = false;
   user: any;
+  select!:string;
+  itemsAux!: Item[];
   constructor(
     private router: Router, 
     private loginService:AuthService,
     private firestoresService: FirestoresService,
     private loadingCtrl: LoadingController,
-    private toastServiceService: ToastServiceService
+    private toastServiceService: ToastServiceService,
+    private navController: NavController
   ) {}
 
   ngOnInit() {
@@ -30,6 +33,8 @@ export class Tab2Page implements OnInit {
           this.user = userData?.uid;
           console.log(this.user);
      }); 
+
+     this.select = "Cosas Lindas";
   }
 
   ionViewWillEnter() {
@@ -41,6 +46,10 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  navegarCamara(seccion :string,){
+    this.navController.navigateForward('/camara/'+ seccion);
+  }
+
   async getAllData(): Promise<void> {
     this.uploading = true;
     const loading = await this.loadingCtrl.create({
@@ -50,6 +59,8 @@ export class Tab2Page implements OnInit {
     await loading.present();
     try{
       this.items = await this.firestoresService.getAllItems();
+      this.itemsAux = this.items.filter(item => item.tipo == this.select); 
+      console.log(this.items);
     } catch(er){
       console.log('Error al obtener datos:', er);
     } finally{
@@ -57,6 +68,14 @@ export class Tab2Page implements OnInit {
       await loading.dismiss();
     }
   }
+
+
+  handleChange(event:any)
+  {
+     this.select = event.target.value;
+     this.getAllData();
+  }
+
   async votar(item: Item): Promise<void> 
   {
       if(item.votos)
@@ -65,7 +84,7 @@ export class Tab2Page implements OnInit {
         console.log(index);
         if(index > -1)
         {
-          item.votos.splice(index,0);
+          item.votos.splice(index,1);
         }
         else
         {

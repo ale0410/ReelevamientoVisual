@@ -1,12 +1,5 @@
-<ul>
-  <li class="text" *ngFor="let item of items$ | async">
-    {{item.name}}
-  </li>
-</ul>
 
-<ion-app class="custom-splash">
+<ion-app>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
   
-  <img src="../src/assets/videocamara.gif">
-  <ion-router-outlet id="main-content"></ion-router-outlet>
-   
 </ion-app>

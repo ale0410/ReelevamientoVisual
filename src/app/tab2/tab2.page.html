@@ -11,9 +11,53 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- <ion-content [fullscreen]="true">
+</ion-content> --> 
+
 <ion-content [fullscreen]="true">
+  <!-- <ion-row>
+    <ion-col style="background-image: url('../../assets/images/floor.jpg');">
+      <ion-button
+        color="none" 
+        expand="block"
+        class="ion-button"
+        style="background-image:url('../../assets/images/cosaslindas.jpg'); background-size:cover; padding: 10px; height: 380px" 
+        (click)="navegarCamara('Cosas Lindas')"
+      >
+        <div style="background-color: rgba(0,0,0,0.5); color: white; padding: 20px; width: 100%;">
+          Cosas Lindas 
+        </div>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col style="background-image: url('../../assets/images/floor.jpg');">
+      <ion-button 
+        color="none" 
+        expand="block"
+        class="ion-button"
+        style="background-image:url('../../assets/images/cosasfeas.jpg'); background-size:cover; padding: 10px; height: 380px"
+        (click)="navegarCamara('Cosas Feas')"
+      >
+        <div style="background-color: rgba(0,0,0,0.5); color: white; padding: 20px; width: 100%;">
+          Cosas Feas 
+        </div>
+    </ion-button>
+    </ion-col>
+  </ion-row> -->
+  <ion-list>
+    <ion-item>
+      <ion-select (ionChange)="handleChange($event)" value="Cosas Lindas" interface="popover">
+        <ion-select-option value="Cosas Lindas">Cosas Lindas
+        </ion-select-option>
+        <ion-select-option value="Cosas Feas">Cosas Feas
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-list>
   <ion-list *ngIf="!uploading" style="background-image: url('../../assets/images/floor.jpg');">
-    <ion-card *ngFor="let item of items"  class="custom-card">
+    <ion-card *ngFor="let item of itemsAux"  class="custom-card">
       <img alt="Silhouette of mountains" [src]="item.image" />
       <ion-card-header>
         <ion-card-title style="color: #EFF3F5; display: flex; justify-content: space-between;">
@@ -23,12 +67,12 @@
         <ion-card-subtitle style="color: #C8CDD0;">Tipo: {{item.tipo}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p>Votos: {{ item.votos }}</p>
+        <p>Votos: {{ item.votos?.length }}</p>
       </ion-card-content>
       <ion-item *ngFor="let user of users">
         {{ user.name }} - {{ user.email }}
       </ion-item>
-     <!-- <ion-chip [color]="fotoVotada(item)" class="custom-chip" (click)="votar(item)">Votar</ion-chip>  -->
+      <!-- <ion-chip [color]="fotoVotada(item)" class="custom-chip" (click)="votar(item)">Votar</ion-chip>   -->
       <ion-chip class="custom-chip" [class.voted]="item.votos" (click)="votar(item)">Votar</ion-chip>
     </ion-card>
   </ion-list>

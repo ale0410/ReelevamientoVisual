@@ -54,8 +54,9 @@
     
         <br>
         
-        <ion-button (click)="onLogin(loginForm)" color="primary" type="submit" expand="block" size="large">Ingresar</ion-button>
+        <ion-button (click)="onLogin(loginForm)" color="primary" type="submit" expand="block" size="large" [disabled]="mostrarSpinner">Ingresar</ion-button>
           
+        <ion-spinner name="crescent" *ngIf="mostrarSpinner" class="full-screen-spinner"></ion-spinner>
 
         <ion-fab vertical="top" horizontal="end" slot="fixed">
           <ion-fab-button size="large">
