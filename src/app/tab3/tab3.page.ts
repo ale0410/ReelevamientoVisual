@@ -9,6 +9,7 @@ import { BaseChartDirective } from 'ng2-charts';
 //import * as Chart from 'chart.js';
 import Item from '../interface/Item.interface';
 import { VerImagenModalPagePage } from '../ver-imagen-modal-page/ver-imagen-modal-page.page';
+import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -18,6 +19,8 @@ import { VerImagenModalPagePage } from '../ver-imagen-modal-page/ver-imagen-moda
 export class Tab3Page {
 
   @ViewChild(BaseChartDirective) chartC: BaseChartDirective | undefined;
+  indiceFotoActual: number = 0;
+  swiperModules = [IonicSlides];
   chartType: string = 'bar';
   chart!:Chart;
   torta!: Chart;
@@ -349,6 +352,37 @@ obtenerRutaFoto(fecha: string, usuario: string) {
       }
     });
     this.chart.update();
+    this.lockSwipeToNext();
+    this.lockSwipeToPrev();
+    this.length(0);
+  }
+
+  length(arg0: number) {
+    return arg0;
+  }
+
+  lockSwipeToNext() {
+    // Lógica para mostrar la siguiente foto
+    if (this.indiceFotoActual < this.fotos.length - 1) {
+      this.indiceFotoActual++;
+    } else {
+      this.indiceFotoActual = 0; // Volver al principio si ya estás en la última foto
+    }
+    // Actualizar la ruta de la foto que se muestra en tu vista
+    // Por ejemplo, si tienes una variable para la ruta de la imagen actual:
+    this.rutaFotoActual = this.fotos[this.indiceFotoActual];
+  }
+
+  lockSwipeToPrev(){
+    // Lógica para mostrar la foto anterior
+    if (this.indiceFotoActual > this.fotos.length + 1) {
+      this.indiceFotoActual--;
+    } else {
+      this.indiceFotoActual = 0; // Volver al principio si ya estás en la última foto
+    }
+    // Actualizar la ruta de la foto que se muestra en tu vista
+    // Por ejemplo, si tienes una variable para la ruta de la imagen actual:
+    this.rutaFotoActual = this.fotos[this.indiceFotoActual];
   }
 
   createPieChart(): void {
@@ -377,7 +411,11 @@ obtenerRutaFoto(fecha: string, usuario: string) {
       data: data,
       options: options
     });
+    this.lockSwipeToNext();
+    this.lockSwipeToPrev();
+    this.length(0);
   }
+
   generateBackgroundColors(numColores: number): string[] {
     const colors = [];
     for (let i = 0; i < numColores; i++) {
@@ -386,6 +424,7 @@ obtenerRutaFoto(fecha: string, usuario: string) {
     }
     return colors;
   }
+
   generateRandomColor(): string {
     const letters = '0123456789ABCDEF';
     let color = '#';

@@ -9,8 +9,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { NavController, NavParams, ToastController } from '@ionic/angular';
 import { environment } from '../environments/environment';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 //import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -26,10 +26,6 @@ import { UsuariosProvider } from 'src/providers/usuarios/usuarios';
 import { ImagenesProvider } from 'src/providers/imagenes/imagenes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
-import { FeasPage } from './pages/feas/feas.page';
-import { LindasPage } from './pages/lindas/lindas.page';
-import { Camera } from '@ionic-native/camera';
-import { HttpClient } from '@angular/common/http';
 import { CamaraProvider } from 'src/providers/camara/camara';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { GaleriaFotosComponent } from './galeria-fotos/galeria-fotos.component';
@@ -40,6 +36,7 @@ import { GaleriaFotosComponent } from './galeria-fotos/galeria-fotos.component';
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent, SplashScreenComponent, GaleriaFotosComponent],
   imports: [BrowserModule,
     NgChartsModule, 

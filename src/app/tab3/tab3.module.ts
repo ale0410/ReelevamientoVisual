@@ -9,13 +9,14 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ExploreContainerComponentModule,
-    Tab3PageRoutingModule
+    Tab3PageRoutingModule,
   ],
   declarations: [Tab3Page]
 })
