@@ -3,49 +3,36 @@
 
 <ion-content [fullscreen]= "true" class="ion-padding">
 
-  
-    <!-- <div *ngIf="spinner">
-      spinnerr
-    </div> -->
     <div *ngIf="error">
       {{error}}
     </div>
 
-    <div id="header">
-      <div id="app-bar">
-        <div id="logo">
-          <img alt="icono" src="../../assets/icon/img-camara-IP-exterior.png"/>
-        </div>
-        <div></div>
-      </div>
-    </div>
+    <img alt="icono" src="../../assets/icon/visualizador.jpg" style="width: 400px;"/> 
+        
     <br>
     <form *ngIf="!spinner" #loginForm="ngForm" novalidate>
-      <div class="">
-
-      </div>
         <ion-list>
           <ion-item>
-            <ion-input shape="round" [(ngModel)]="login.email" name="email" type="email" #mail="ngModel" spellcheck="false"
+            <ion-input id="loginUser" shape="round" [(ngModel)]="login.email" name="email" type="email" #mail="ngModel" spellcheck="false"
               autocapitalize="off" required fill="outline" label="Mail" label-placement="floating">
             </ion-input> 
           </ion-item>
           <ion-text color="danger">
-            <p [hidden]="mail.valid || submitted === false" class="ion-padding-start">
+            <p [hidden]="mail.valid || submitted === false">
               Por favor, ingrese su Correo Electrónico.
             </p>
           </ion-text>
           <ion-item>
-            <ion-input shape="round" [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required fill="outline" label="Contraseña" label-placement="floating">
+            <ion-input id="loginPassword" shape="round" [(ngModel)]="pass" name="password" type="password" #password="ngModel" minlength=6 required fill="outline" label="Contraseña" label-placement="floating">
             </ion-input>
           </ion-item>
           <ion-text color="danger">
-            <p [hidden]="!password.errors || submitted === false" class="ion-padding-start">
+            <p [hidden]="!password.errors || submitted === false">
               La contraseña ingresada es muy corta.
             </p>
           </ion-text>
           <ion-text color="danger">
-            <p [hidden]="!password.errors || submitted === false" class="ion-padding-start">
+            <p [hidden]="!password.errors || submitted === false">
               Por favor, ingrese una contraseña.
             </p>
           </ion-text>
@@ -54,35 +41,53 @@
     
         <br>
         
-        <ion-button (click)="onLogin(loginForm)" color="primary" type="submit" expand="block" size="large" [disabled]="mostrarSpinner">Ingresar</ion-button>
+        <ion-button 
+        style="background-color: rgb(171, 249, 103);
+        color: whitesmoke;
+        height: 100px;
+        font-size: xx-large;" 
+        (click)="onLogin(loginForm)" 
+        color="primary" 
+        type="submit" expand="block" size="large" [disabled]="mostrarSpinner">Ingresar</ion-button>
           
         <ion-spinner name="crescent" *ngIf="mostrarSpinner" class="full-screen-spinner"></ion-spinner>
 
-        <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <!-- <ion-list>
+          <ion-item>
+            <ion-select style="background-color: pink; height: 100px;" label="Seleccione un usuario" label-placement="fixed" placeholder="Login user">
+              <ion-select-option value="admin" (click)="admin()">Admin</ion-select-option>
+              <ion-select-option value="invitado" (click)="invitado()">Invitado</ion-select-option>
+              <ion-select-option value="usuario" (click)="usuario()">Usuario</ion-select-option>
+              <ion-select-option value="anonimo" (click)="anonimo()">Anonimo</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list> -->
+
+        <ion-fab vertical="top" horizontal="top" slot="fixed">
           <ion-fab-button size="large">
-            <ion-icon name="share"></ion-icon>
+            <ion-icon name="add"></ion-icon>
           </ion-fab-button>
           <ion-fab-list side="bottom">
             Admin
-            <ion-fab-button color="primary">
+            <ion-card color="primary">
               <ion-icon name="person" (click)="admin()"></ion-icon>
-            </ion-fab-button>
+            </ion-card>
             Invitado
-            <ion-fab-button color="primary">
+            <ion-card color="primary">
               <ion-icon name="person" (click)="invitado()"></ion-icon>
-            </ion-fab-button>
+            </ion-card>
             Usuario
-            <ion-fab-button color="primary">
+            <ion-card color="primary">
               <ion-icon name="person" (click)="usuario()"></ion-icon>
-            </ion-fab-button>
+            </ion-card>
             Anonimo
-            <ion-fab-button color="primary">
+            <ion-card color="primary">
               <ion-icon name="person" (click)="anonimo()"></ion-icon>
-            </ion-fab-button>
+            </ion-card>
             Tester
-            <ion-fab-button color="primary">
+            <ion-card color="primary">
               <ion-icon name="person" (click)="tester()"></ion-icon>
-            </ion-fab-button>
+            </ion-card>
           </ion-fab-list>
         </ion-fab>
 

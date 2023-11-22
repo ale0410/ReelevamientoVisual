@@ -42,7 +42,8 @@
            class="chart"
            data="barChartData"
            options="barChartOptions"
-           type="barChartType">
+           type="barChartType"
+           (chartClick)="chartClicked($event)">
      </canvas>
     </ion-card-content>
   </ion-card>
@@ -88,4 +89,10 @@
       Change Legend Position
     </button>
   </div> -->
+  
+    <div *ngFor="let foto of fotos" (click)="verImagen(foto)">
+        <!-- Aquí puedes colocar tu gráfico o imagen -->
+      <img [src]="rutaFotoActual" alt="Foto" (click)="listaEdificios()">
+    </div>
+    
 </ion-content>

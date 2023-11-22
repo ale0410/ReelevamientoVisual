@@ -162,6 +162,9 @@ MIT
 @ionic-native/core
 MIT
 
+@ionic-native/device-motion
+MIT
+
 @ionic-native/splash-screen
 MIT
 

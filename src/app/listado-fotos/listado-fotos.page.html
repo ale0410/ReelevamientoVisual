@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Listado de Fotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let foto of fotos" (click)="verFoto(foto)">
+      <!-- Mostrar la imagen o miniatura de la foto -->
+      <ion-thumbnail slot="start">
+        <img [src]="foto" alt="Foto">
+      </ion-thumbnail>
+      <ion-label>{{ foto }}</ion-label> <!-- Puedes mostrar información adicional si la tienes -->
+    </ion-item>
+  </ion-list>
+</ion-content>

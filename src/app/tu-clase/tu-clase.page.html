@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>tu-clase</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">tu-clase</ion-title>
+      <div *ngFor="let foto of fotos" (click)="verImagen(foto)">
+        <!-- Aquí puedes colocar tu gráfico o imagen -->
+      <img [src]="rutaFotoActual" alt="Foto">
+    </div>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

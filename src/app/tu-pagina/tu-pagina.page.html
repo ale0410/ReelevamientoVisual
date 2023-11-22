@@ -1,0 +1,20 @@
+<!-- tu-pagina.page.html -->
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let image of images">
+        <!-- Aquí puedes utilizar algún elemento gráfico, por ejemplo, una miniatura -->
+        <ion-icon name="image" (click)="viewImage(image.url)"></ion-icon>
+        <!-- Puedes mostrar más detalles de la imagen si es necesario -->
+        <p>{{ image.description }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <ion-item *ngFor="let photo of userPhotos">
+      <!-- Muestra las fotos del usuario, puedes utilizar un elemento img o algún otro método para mostrar la imagen -->
+      <ion-img [src]="photo.url"></ion-img>
+      <ion-label>{{ photo.description }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

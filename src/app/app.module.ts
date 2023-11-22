@@ -32,6 +32,7 @@ import { Camera } from '@ionic-native/camera';
 import { HttpClient } from '@angular/common/http';
 import { CamaraProvider } from 'src/providers/camara/camara';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { GaleriaFotosComponent } from './galeria-fotos/galeria-fotos.component';
 
 
 
@@ -39,7 +40,7 @@ import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SplashScreenComponent],
+  declarations: [AppComponent, SplashScreenComponent, GaleriaFotosComponent],
   imports: [BrowserModule,
     NgChartsModule, 
     IonicModule.forRoot(), 

@@ -2,12 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { AuthService} from '../services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 // import DataLabelsPlugin from 'chartjs-plugin-datalabels';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { FirestoresService } from '../services/firestores.service';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType, Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 //import * as Chart from 'chart.js';
 import Item from '../interface/Item.interface';
+import { VerImagenModalPagePage } from '../ver-imagen-modal-page/ver-imagen-modal-page.page';
 
 @Component({
   selector: 'app-tab3',
@@ -22,6 +23,8 @@ export class Tab3Page {
   torta!: Chart;
   cosasLindas: Item[] = [];
   cosasFeas: Item[] = [];
+  fotos: string[] = ['../../assets/Ohiggins1636.jpg', '../../assets/Ohiggins1800.jpg', '../../assets/Ohiggins2200.jpg'];
+  rutaFotoActual!: string;
   uploading = false;
 
   // Pie
@@ -105,10 +108,12 @@ export class Tab3Page {
     private loginService: AuthService, 
     private loadingCtrl: LoadingController,
     private firestoresService: FirestoresService,
+    private modalController: ModalController
     ) {}
 
   ionViewWillEnter() {
     this.getAllData();
+    //this.chartC?.chartClick()
   }
   logout(){
     this.loginService.signOut().then(() => {
@@ -118,14 +123,8 @@ export class Tab3Page {
 
   // events
 
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: object[];
-  }): void {
-    console.log(event, active);
+  public chartClicked(event:any): void {
+    console.log(event);
   }
 
   public chartHovered({
@@ -252,6 +251,44 @@ export class Tab3Page {
     this.chart?.render();
   }
 
+  // Ejemplo con Chart.js
+public options = {
+  onClick: (event: string, chartElements: string | any[]) => {
+    if (chartElements.length > 0) {
+      const selectedData = chartElements[0]._chart.data.datasets[0].data[chartElements[0]._index];
+      // Llamar a la función para mostrar la foto correspondiente
+      this.mostrarFoto(selectedData);
+    }
+  },
+};
+
+mostrarFoto(selectedData: { fecha: any; usuario: any; }) {
+  const fecha = selectedData.fecha;
+  const usuario = selectedData.usuario;
+
+  // Lógica para obtener la ruta de la foto según la fecha y el usuario
+  const rutaFoto = this.obtenerRutaFoto(fecha, usuario);
+
+  // Mostrar la foto en la interfaz de usuario (puede ser un modal, una página nueva, etc.)
+  // Aquí debes implementar la lógica específica de Ionic para mostrar la foto.
+  // Puedes usar un componente como ion-modal o ion-popover para mostrar la foto.
+}
+
+obtenerRutaFoto(fecha: string, usuario: string) {
+  // Lógica para buscar la ruta de la foto en tu conjunto de datos o base de datos
+  // Puedes usar servicios como AngularFire para interactuar con Firebase si estás utilizando una base de datos en la nube.
+
+  // Ejemplo de lógica ficticia
+  const fotos = [
+    { fecha: '2023-01-01', usuario: 'usuario1', ruta: 'assets/fotos/foto1.jpg' },
+    // ... más fotos ...
+  ];
+
+  const fotoSeleccionada = fotos.find(foto => foto.fecha === fecha && foto.usuario === usuario);
+
+  return fotoSeleccionada ? fotoSeleccionada.ruta : null;
+}
+
   async getAllData(): Promise<void> {
     this.uploading = true;
     const loading = await this.loadingCtrl.create({
@@ -356,6 +393,26 @@ export class Tab3Page {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+
+  async verImagen(rutaImagen: string) {
+    const modal = await this.modalController.create({
+      component: VerImagenModalPagePage, // Componente modal para ver la imagen
+      componentProps: {
+        imagen: rutaImagen // Pasar la ruta de la imagen al componente modal
+      }
+    });
+    return await modal.present();
+  }
+
+  listaEdificios(){
+    const image1 = { flipped: false, src: 'assets/Ohiggins1636.jpg' };
+    const image2 = { flipped: false, src: 'assets/Ohiggins1800.jpg' };
+    const image3 = { flipped: false, src: 'assets/Ohiggins2200.jpg' };
+
+    const images = [image1, image2, image3];
+
+    return images;
   }
 
 }

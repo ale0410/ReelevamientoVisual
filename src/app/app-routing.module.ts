@@ -59,6 +59,22 @@ const routes: Routes = [
     path: 'camara/:type',
     loadChildren: () => import('./camara/camara.module').then( m => m.CamaraPageModule)
   },
+  {
+    path: 'tu-clase',
+    loadChildren: () => import('./tu-clase/tu-clase.module').then( m => m.TuClasePageModule)
+  },
+  {
+    path: 'ver-imagen-modal-page',
+    loadChildren: () => import('./ver-imagen-modal-page/ver-imagen-modal-page.module').then( m => m.VerImagenModalPagePageModule)
+  },
+  {
+    path: 'listado-fotos',
+    loadChildren: () => import('./listado-fotos/listado-fotos.module').then( m => m.ListadoFotosPageModule)
+  },
+  {
+    path: 'tu-pagina',
+    loadChildren: () => import('./tu-pagina/tu-pagina.module').then( m => m.TuPaginaPageModule)
+  },
 ];
 
 @NgModule({
