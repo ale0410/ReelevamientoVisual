@@ -53,11 +53,17 @@
         <ion-select-option value="Cosas Feas">Cosas Feas
         </ion-select-option>
       </ion-select>
-
+    </ion-item>
+    <ion-item>
+      <ion-select (ionChange)="handleChangeUser($event)" value="Fotos del usuario" interface="popover">
+        <ion-select-option value="Fotos usuario">Fotos del usuario
+        </ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
-  <ion-list *ngIf="!uploading" style="background-image: url('../../assets/images/floor.jpg');">
-    <ion-card *ngFor="let item of itemsAux"  class="custom-card">
+  <swiper-container slides-per-view="1" loop="true" #swiper>
+    <swiper-slide *ngFor="let item of itemsAux">
+      <ion-card class="custom-card">
       <img alt="Silhouette of mountains" [src]="item.image" />
       <ion-card-header>
         <ion-card-title style="color: #EFF3F5; display: flex; justify-content: space-between;">
@@ -75,5 +81,9 @@
       <!-- <ion-chip [color]="fotoVotada(item)" class="custom-chip" (click)="votar(item)">Votar</ion-chip>   -->
       <ion-chip class="custom-chip" [class.voted]="item.votos" (click)="votar(item)">Votar</ion-chip>
     </ion-card>
-  </ion-list>
+  </swiper-slide> 
+  </swiper-container>
+  <!-- <ion-button (click)="lockSwipeToPrev()">Anterior</ion-button>
+  <ion-button (click)="lockSwipeToNext()">Siguiente</ion-button>-->
+  <!-- <ion-button (click)="slideTo()">Inicio</ion-button> -->
 </ion-content>

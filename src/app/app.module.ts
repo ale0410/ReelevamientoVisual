@@ -36,7 +36,6 @@ import { GaleriaFotosComponent } from './galeria-fotos/galeria-fotos.component';
 
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent, SplashScreenComponent, GaleriaFotosComponent],
   imports: [BrowserModule,
     NgChartsModule, 

@@ -19,8 +19,6 @@ import { IonicSlides } from '@ionic/angular';
 export class Tab3Page {
 
   @ViewChild(BaseChartDirective) chartC: BaseChartDirective | undefined;
-  indiceFotoActual: number = 0;
-  swiperModules = [IonicSlides];
   chartType: string = 'bar';
   chart!:Chart;
   torta!: Chart;
@@ -88,6 +86,7 @@ export class Tab3Page {
       { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
     ],
   };
+  foto!: Item;
 
   // public pieChartLabels: string[] = ['Etiqueta 1', 'Etiqueta 2', 'Etiqueta 3'];
   // public pieChartData: number[] = [300, 500, 200];
@@ -126,7 +125,7 @@ export class Tab3Page {
 
   // events
 
-  public chartClicked(event:any): void {
+  public chartClicked(event: any): void {
     console.log(event);
   }
 
@@ -277,6 +276,10 @@ mostrarFoto(selectedData: { fecha: any; usuario: any; }) {
   // Puedes usar un componente como ion-modal o ion-popover para mostrar la foto.
 }
 
+seleccionarFotoGraficoonClick(event:any, element:any, chart:any) {
+  this.foto = this.cosasFeas[element[0].index];
+}
+
 obtenerRutaFoto(fecha: string, usuario: string) {
   // Lógica para buscar la ruta de la foto en tu conjunto de datos o base de datos
   // Puedes usar servicios como AngularFire para interactuar con Firebase si estás utilizando una base de datos en la nube.
@@ -329,6 +332,9 @@ obtenerRutaFoto(fecha: string, usuario: string) {
         }]
       },
       options: {
+        onClick: (event,element,chart) => {
+          this.foto = this.cosasFeas[element[0].index];
+        },
         responsive: true,
         scales: {
           xAxes: {
@@ -352,37 +358,7 @@ obtenerRutaFoto(fecha: string, usuario: string) {
       }
     });
     this.chart.update();
-    this.lockSwipeToNext();
-    this.lockSwipeToPrev();
-    this.length(0);
-  }
-
-  length(arg0: number) {
-    return arg0;
-  }
-
-  lockSwipeToNext() {
-    // Lógica para mostrar la siguiente foto
-    if (this.indiceFotoActual < this.fotos.length - 1) {
-      this.indiceFotoActual++;
-    } else {
-      this.indiceFotoActual = 0; // Volver al principio si ya estás en la última foto
-    }
-    // Actualizar la ruta de la foto que se muestra en tu vista
-    // Por ejemplo, si tienes una variable para la ruta de la imagen actual:
-    this.rutaFotoActual = this.fotos[this.indiceFotoActual];
-  }
-
-  lockSwipeToPrev(){
-    // Lógica para mostrar la foto anterior
-    if (this.indiceFotoActual > this.fotos.length + 1) {
-      this.indiceFotoActual--;
-    } else {
-      this.indiceFotoActual = 0; // Volver al principio si ya estás en la última foto
-    }
-    // Actualizar la ruta de la foto que se muestra en tu vista
-    // Por ejemplo, si tienes una variable para la ruta de la imagen actual:
-    this.rutaFotoActual = this.fotos[this.indiceFotoActual];
+    
   }
 
   createPieChart(): void {
@@ -392,14 +368,13 @@ obtenerRutaFoto(fecha: string, usuario: string) {
     const numColores = nombres.length;
     const backgroundColor = this.generateBackgroundColors(numColores);
     const data = {
-      labels: nombres,
       datasets: [
         {
           data: cantidadesVotos,
           backgroundColor: backgroundColor,
           borderWidth: 1
         }
-      ]
+      ],
     };
     const options = {
       responsive: true,
@@ -409,11 +384,12 @@ obtenerRutaFoto(fecha: string, usuario: string) {
     this.torta == new Chart(ctx, {
       type: 'pie',
       data: data,
-      options: options
+      options: {
+        onClick: (event:any, element:any, chart:any) => {
+          this.foto = this.cosasLindas[element[0].index];
+        }
+      }
     });
-    this.lockSwipeToNext();
-    this.lockSwipeToPrev();
-    this.length(0);
   }
 
   generateBackgroundColors(numColores: number): string[] {

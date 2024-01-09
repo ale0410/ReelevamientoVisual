@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { VerImagenModalPagePage } from '../ver-imagen-modal-page/ver-imagen-modal-page.page';
 import { Subscription } from 'rxjs';
 import { ModalController } from '@ionic/angular';
@@ -16,7 +15,7 @@ export class TuClasePage implements OnInit {
   indiceFotoActual: number = 0;
   rutaFotoActual!: string;
 
-  constructor(private deviceMotion: DeviceMotion, private modalController: ModalController) {}
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {
     
@@ -25,17 +24,17 @@ export class TuClasePage implements OnInit {
   startWatchingAcceleration() {
     const options = { frequency: 200 }; // Frecuencia de actualización del sensor (en milisegundos)
 
-    this.accelerationSubscription = this.deviceMotion.watchAcceleration(options)
-      .subscribe((acceleration: DeviceMotionAccelerationData) => {
-        // Utiliza los datos del acelerómetro para detectar el movimiento y cambiar entre fotos
-        if (acceleration.x > 7) {
-          // Cambiar a la foto siguiente
-          this.mostrarSiguienteFoto();
-        } else if (acceleration.x < -7) {
-          // Cambiar a la foto anterior
-          this.mostrarFotoAnterior();
-        }
-      });
+    // this.accelerationSubscription = this.deviceMotion.watchAcceleration(options)
+    //   .subscribe((acceleration: DeviceMotionAccelerationData) => {
+    //     // Utiliza los datos del acelerómetro para detectar el movimiento y cambiar entre fotos
+    //     if (acceleration.x > 7) {
+    //       // Cambiar a la foto siguiente
+    //       this.mostrarSiguienteFoto();
+    //     } else if (acceleration.x < -7) {
+    //       // Cambiar a la foto anterior
+    //       this.mostrarFotoAnterior();
+    //     }
+    //   });
   }
 
   stopWatchingAcceleration() {

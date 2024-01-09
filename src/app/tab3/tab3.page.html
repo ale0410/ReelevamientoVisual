@@ -62,7 +62,8 @@
           class="chart"
           data="pieChartData"
           type="pieChartType"
-          options="pieChartOptions">
+          options="pieChartOptions"
+          (chartClick)="chartClicked($event)">
        </canvas>
     </ion-card-content>
   </ion-card>
@@ -94,5 +95,8 @@
          Aquí puedes colocar tu gráfico o imagen 
       <img [src]="rutaFotoActual" alt="Foto" (click)="listaEdificios()">
     </div> -->
+    <ng-container *ngIf="foto">
+        <img [src]="foto.image">
+    </ng-container>
     
 </ion-content>

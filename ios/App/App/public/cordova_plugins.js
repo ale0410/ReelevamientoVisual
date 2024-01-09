@@ -2,14 +2,6 @@
   cordova.define('cordova/plugin_list', function(require, exports, module) {
     module.exports = [
       {
-          "id": "cordova-plugin-device-motion.Acceleration",
-          "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
-          "pluginId": "cordova-plugin-device-motion",
-        "clobbers": [
-          "Acceleration"
-        ]
-        },
-      {
           "id": "cordova-plugin-camera.Camera",
           "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
           "pluginId": "cordova-plugin-camera",
@@ -34,14 +26,6 @@
         ]
         },
       {
-          "id": "cordova-plugin-device-motion.accelerometer",
-          "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
-          "pluginId": "cordova-plugin-device-motion",
-        "clobbers": [
-          "navigator.accelerometer"
-        ]
-        },
-      {
           "id": "cordova-plugin-camera.camera",
           "file": "plugins/cordova-plugin-camera/www/Camera.js",
           "pluginId": "cordova-plugin-camera",
@@ -53,8 +37,7 @@
     module.exports.metadata =
     // TOP OF METADATA
     {
-      "cordova-plugin-camera": "6.0.0",
-      "cordova-plugin-device-motion": "2.0.1"
+      "cordova-plugin-camera": "6.0.0"
     };
     // BOTTOM OF METADATA
     });

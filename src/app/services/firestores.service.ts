@@ -56,6 +56,7 @@ export class FirestoresService {
     });
     return items;
   }
+
   async getAllItemsType(tipo: string):Promise<Item[]>{
     const itemCollection = collection(this.firestore, 'relevamiento');
     const querySnapshot = await getDocs(query(itemCollection, where('tipo', '==', tipo)));
@@ -67,6 +68,19 @@ export class FirestoresService {
     });
     return items;
   }
+
+  async getAllItemsUser(user: string):Promise<Item[]>{
+    const itemCollection = collection(this.firestore, 'relevamiento');
+    const querySnapshot = await getDocs(query(itemCollection, where('name', '==', user)));
+    console.log(querySnapshot)
+    const items: Item[] = [];
+    querySnapshot.forEach((doc) => {
+      const item = doc.data() as Item;
+      items.push(item);
+    });
+    return items;
+  }
+
   async updateItem(item: Item): Promise<void> {
     const itemRef = doc(this.firestore, 'relevamiento', item.id);
     await setDoc(itemRef, item);

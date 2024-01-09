@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { AuthService} from '../services/auth.service'
 import { Router, RouterModule } from '@angular/router';
 import { FirestoresService } from '../services/firestores.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { IonicSlides, LoadingController, NavController } from '@ionic/angular';
 import Item from '../interface/Item.interface';
 import { ToastServiceService } from '../services/toast-service.service';
+import { PluginListenerHandle } from '@capacitor/core';
+import { Motion, RotationRate } from '@capacitor/motion';
+import { SwiperContainer } from 'swiper/element';
+import { Swiper } from 'swiper/types';
 
 @Component({
   selector: 'app-tab2',
@@ -13,20 +17,42 @@ import { ToastServiceService } from '../services/toast-service.service';
 })
 export class Tab2Page implements OnInit {
 
+  @ViewChild('swiper', { static: false }) swiper!: ElementRef; //Agregar una opcion más al select en donde muestre el listado de fotos del usuario
+  indiceFotoActual: number = 0;
+  swiperModules = [IonicSlides];
+  rutaFotoActual!: string;
   users!: any[];
   items: Item[] = [];
+  itemsUser!: Item[];
   uploading = false;
   user: any;
   select!:string;
   itemsAux!: Item[];
+  subscription: any;
+  characters: string[] = [];
+  characterStyle = { top: '50%', left: '50%' };
+  timer = 0;
+  characterSpeed = 5; // Velocidad de movimiento del personaje en píxeles por segundo
+  characterInterval: any;
+  accelHandler!: PluginListenerHandle;
+  public isLeft: any;
+  public isRight: any;
+  public isVertial: any;
+  public isHorizontal: any;
+  fotos: string[] = ['../../assets/Ohiggins1636.jpg', '../../assets/Ohiggins1800.jpg', '../../assets/Ohiggins2200.jpg'];
+  y!: number;
+  x!: number;
   constructor(
     private router: Router, 
     private loginService:AuthService,
     private firestoresService: FirestoresService,
     private loadingCtrl: LoadingController,
+    private ngZone: NgZone,
     private toastServiceService: ToastServiceService,
     private navController: NavController
-  ) {}
+  ) {
+    //this.startGame();
+  }
 
   ngOnInit() {
      this.loginService.obtenerUsuario().then(userData => {
@@ -35,11 +61,14 @@ export class Tab2Page implements OnInit {
      }); 
 
      this.select = "Cosas Lindas";
+
+     this.comenzar();
   }
 
   ionViewWillEnter() {
     this.getAllData();
   }
+
   logout(){
     this.loginService.signOut().then(() => {
       this.router.navigate(['/login']);
@@ -69,11 +98,36 @@ export class Tab2Page implements OnInit {
     }
   }
 
+  async getAllDataUser(): Promise<void> {
+    this.uploading = true;
+    const loading = await this.loadingCtrl.create({
+      spinner: 'lines', 
+      cssClass: 'custom-loading'
+    });
+    await loading.present();
+    try{
+      this.items = await this.firestoresService.getAllItems();
+      this.itemsUser = this.items.filter(item => item.name == this.select); 
+      console.log(this.items);
+    } catch(er){
+      console.log('Error al obtener datos:', er);
+    } finally{
+      this.uploading = false;
+      await loading.dismiss();
+    }
+  }
+
 
   handleChange(event:any)
   {
      this.select = event.target.value;
      this.getAllData();
+  }
+
+  handleChangeUser(event:any)
+  {
+     this.select = event.target.value;
+     this.getAllDataUser();
   }
 
   async votar(item: Item): Promise<void> 
@@ -99,6 +153,50 @@ export class Tab2Page implements OnInit {
 
       await this.firestoresService.updateItem(item);
         
+  }
+
+  length(arg0: number) {
+    return arg0;
+  }
+
+  lockSwipeToNext() {
+    this.swiper.nativeElement.swiper.slideNext();
+  }
+
+  lockSwipeToPrev(){
+    this.swiper.nativeElement.swiper.slidePrev();
+  }
+
+  slideTo(){
+    this.swiper.nativeElement.swiper.slideTo(0);
+  }
+
+  async comenzar() {
+
+    // Once the user approves, can start listening:
+    this.accelHandler = await Motion.addListener('accel', async event => {
+
+        this.y = event.acceleration.y;   // Inclinación hacia adelante o atrás
+        this.x = event.acceleration.x; // Inclinación hacia la izquierda o derecha
+
+        if(this.y > 1)
+        {
+           this.slideTo();
+        }
+      
+        console.log(this.x);
+
+          if(this.x > 1)
+          {
+            this.lockSwipeToPrev();
+          }
+  
+          if(this.x < -1)
+          {
+            this.lockSwipeToNext();
+          }
+    
+    });
   }
 
   YaVoto(item:Item){

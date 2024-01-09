@@ -53,8 +53,8 @@ export class LoginPage {
   admin() {
     this.login.email = 'admin@admin.com';
     this.pass = '111111';
-    document.getElementById('loginUser')!.innerHTML = this.login.email;
-    document.getElementById('loginPassword')!.innerHTML = this.pass;
+    // document.getElementById('loginUser')!.innerHTML = this.login.email;
+    // document.getElementById('loginPassword')!.innerHTML = this.pass;
   }
 
   invitado() {
